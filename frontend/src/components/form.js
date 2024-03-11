@@ -8,7 +8,7 @@ function Form() {
 
 	const [data, setData] = useState([])
 	useEffect(() => {
-		fetch('http://localhost:8081/nomers')
+		fetch('http://localhost:8080/nomers')
 			.then(res => res.json())
 			.then(data => setData(data))
 			.catch(err => console.log(err))
