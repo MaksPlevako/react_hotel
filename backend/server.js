@@ -13,10 +13,6 @@ const db = mysql.createConnection({
 	database: 'hotel',
 })
 
-app.get('/', (req, res) => {
-	return res.json('Form BackEnd')
-})
-
 app.get('/nomers', (req, res) => {
 	const sql = 'SELECT `id`, `nomers_name` FROM `nomers`'
 	db.query(sql, (err, data) => {
