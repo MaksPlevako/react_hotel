@@ -1,0 +1,43 @@
+.map {
+	background-color: #4e0894;
+	padding: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.map_for768 {
+	display: none;
+}
+
+.map_for1024 {
+	display: none;
+}
+
+@media (max-width: 1024px) {
+	.map {
+		display: none;
+	}
+
+	.map_for1024 {
+		display: block;
+		padding: 20px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+@media (max-width: 768px) {
+	.map_for1024 {
+		display: none;
+	}
+
+	.map_for768 {
+		display: block;
+		padding: 20px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}

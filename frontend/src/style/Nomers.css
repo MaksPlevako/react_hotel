@@ -1,0 +1,198 @@
+/*RULES*/
+
+#rules {
+	background-color: #4e0894;
+}
+
+.rules {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	color: #fff;
+	font-size: 16px;
+	text-align: center;
+}
+
+.rules_text {
+	width: 800px;
+	margin: 0 auto;
+	padding-bottom: 25px;
+}
+
+.rules_btn {
+	color: #fff;
+	border: 1px solid #107107;
+	background-color: #107107;
+	padding: 10px 30px;
+	font-size: 20px;
+	transition: 0.5s;
+}
+
+.rules_btn:hover {
+	background-color: #fff;
+	transition: 0.5s;
+	color: #000;
+	border: 1px solid #107107;
+}
+
+.rules_modal {
+	z-index: 12;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgb(0, 0, 0, 0.5);
+	transform: scale(0);
+}
+
+.active {
+	transform: scale(1);
+}
+
+.rules_modal_content {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	padding: 20px;
+	width: 1000px;
+	height: 630px;
+	color: #000;
+}
+
+.rules_close {
+	border: 0;
+	background-color: #fff;
+	font-size: 30px;
+	font-weight: 500;
+	float: right;
+	cursor: pointer;
+}
+
+.rules_modal_content span {
+	font-size: 32px;
+	font-weight: 500;
+}
+
+.rules_modal_text span p {
+	text-indent: 3ch;
+	text-align: left;
+	font-size: 20px;
+}
+
+/*NOMERS*/
+
+.nomerses {
+	padding-top: 20px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.nomerses span {
+	font-size: 24px;
+}
+
+.nomer {
+	padding-top: 20px;
+	padding-bottom: 30px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.nomer_block {
+	width: 400px;
+	height: 400px;
+	background-color: #4e0894;
+	padding: 15px;
+	color: #fff;
+}
+
+.nomer_text h2 {
+	font-size: 18px;
+	font-weight: normal;
+	margin-top: 10px;
+}
+
+.nomer_text hr {
+	margin: 5px;
+}
+
+#nomers_2 {
+	background-color: #4e0894;
+}
+
+.nomerses_2 {
+	padding-top: 20px;
+	text-align: center;
+	margin: 0 auto;
+	color: #fff;
+}
+
+.nomer_2 {
+	margin-top: 20px;
+	padding-bottom: 30px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.nomerses_2 span {
+	font-size: 24px;
+}
+
+.nomer_block_2 {
+	width: 400px;
+	height: 400px;
+	background-color: #fff;
+	padding: 15px;
+	color: #000;
+}
+
+@media (max-width: 1280px) {
+	.nomer {
+		width: 1280px;
+	}
+	.nomer_2 {
+		width: 1280px;
+	}
+
+	.nomer_text {
+		font-size: 15px;
+	}
+}
+
+@media (max-width: 1024px) {
+	.nomerses img,
+	.nomerses_2 img {
+		width: 60%;
+	}
+
+	.nomer {
+		width: 1024px;
+	}
+	.nomer_2 {
+		width: 1024px;
+	}
+}
+
+@media (max-width: 768px) {
+	.nomer {
+		width: 768px;
+	}
+	.nomer_2 {
+		width: 768px;
+	}
+
+	.nomer_text {
+		font-size: 12px;
+	}
+
+	.rules_modal_content {
+		width: 700px;
+		overflow: auto;
+	}
+
+	.rules_text {
+		width: 90%;
+	}
+}
