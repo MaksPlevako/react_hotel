@@ -30,7 +30,7 @@ function Form() {
 	const handleSubmit = event => {
 		event.preventDefault()
 		axios
-			.post('http://localhost:8081/hotel', values)
+			.post('http://localhost:8080/hotel', values)
 			.then(res => console.log('good', values))
 			.catch(err => console.log(err))
 		setActive(true)
