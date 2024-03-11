@@ -1,0 +1,460 @@
+/*HOME*/
+
+#home {
+	background-image: url(../img/home.png);
+	background-size: cover;
+	height: 400px;
+}
+
+.home {
+	text-align: center;
+	padding-top: 30px;
+	color: #fff;
+}
+
+.home_back {
+	background: rgba(0, 0, 0, 0.3);
+	backdrop-filter: blur(10px);
+	border-radius: 50px;
+	width: 1200px;
+	height: 300px;
+	margin: 0 auto;
+	padding-top: 30px;
+}
+
+.home_text {
+	font-size: 30px;
+}
+
+.booking_block,
+.booking_button {
+	display: inline-block;
+}
+
+.booking_block {
+	padding: 40px 15px 0 15px;
+}
+
+.booking_text {
+	font-size: 18px;
+	text-align: left;
+}
+
+.booking_form {
+	padding-top: 10px;
+}
+
+input,
+select {
+	width: 150px;
+}
+
+.line {
+	display: none;
+}
+
+select {
+	height: 28px;
+}
+
+.booking_button {
+	padding-top: 20px;
+}
+
+.booking_button input {
+	background-color: #4e0894;
+	border: 1px solid #4e0894;
+	padding: 15px 10px;
+	color: #fff;
+	transition: 0.4s;
+	text-transform: uppercase;
+	letter-spacing: 0.3px;
+}
+
+.booking_button input:hover {
+	background-color: #fff;
+	color: #000;
+	transition: 0.4s;
+}
+
+select:invalid + span::after,
+input:invalid + span::after {
+	position: absolute;
+	content: '✖';
+	padding-left: 5px;
+	color: #000;
+}
+
+select:valid + span::after,
+input:valid + span::after {
+	position: absolute;
+	content: '✓';
+	padding-left: 5px;
+	color: #fff;
+}
+
+.modal {
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 50px;
+	background-color: #4e0894;
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transform: scale(0);
+}
+
+.active {
+	transform: scale(1);
+}
+
+.modal_content {
+	color: #fff;
+	font-size: 32px;
+}
+
+/*ABOUT*/
+
+#about {
+	background-image: url(../img/about_1.png), url(../img/about_2.png);
+	background-position: 3% 90%, 97% 10%;
+	background-repeat: no-repeat;
+	height: 600px;
+}
+
+.about {
+	text-align: center;
+	padding-top: 100px;
+}
+
+.about_text_main {
+	font-size: 30px;
+	padding-bottom: 60px;
+}
+
+.about_text_sec {
+	width: 480px;
+	margin: 0 auto;
+	padding-bottom: 80px;
+	font-size: 16px;
+}
+
+.about_button {
+	background-color: #107107;
+	border: 1px solid #107107;
+	padding: 10px 30px;
+	color: #fff;
+	font-size: 20px;
+	transition: 0.4s;
+}
+
+.about_button:hover {
+	background-color: #000;
+	border: 1px solid #107107;
+	padding: 15px 35px;
+	transition: 0.4s;
+	font-size: 21px;
+}
+
+.about_button_more {
+	visibility: visible;
+	opacity: 1;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgb(0, 0, 0, 0.5);
+}
+
+.show {
+	visibility: hidden;
+	opacity: 0;
+}
+
+.more_content {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	padding: 20px;
+	width: 1000px;
+	height: 600px;
+}
+
+.more_close {
+	border: 0;
+	background-color: #fff;
+	font-size: 30px;
+	font-weight: 500;
+	float: right;
+	cursor: pointer;
+}
+
+.more_content span {
+	font-size: 32px;
+	font-weight: 500;
+}
+
+.more_text {
+	padding-top: 20px;
+	font-size: 18px;
+	margin: 0 auto;
+	overflow-x: auto;
+	height: 500px;
+}
+
+.more_text h2 {
+	font-size: 24px;
+	font-weight: normal;
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+
+.more_text hr {
+	margin: 10px;
+}
+
+/*SERVICES*/
+
+#services {
+	background-color: #4e0894;
+	text-align: center;
+	color: #fff;
+}
+
+.services_text_main {
+	font-size: 32px;
+	padding-top: 30px;
+	padding-bottom: 40px;
+}
+
+.services_text {
+	font-size: 18px;
+	padding-top: 20px;
+	padding-bottom: 50px;
+}
+
+.services_view {
+	display: flex;
+	justify-content: space-around;
+}
+
+/*NOMERS*/
+
+.nomers {
+	text-align: center;
+	padding-top: 45px;
+}
+
+.nomers_block {
+	display: flex;
+	justify-content: space-between;
+}
+
+.nomers_block img {
+	padding-bottom: 45px;
+}
+
+.nomers_block img:last-child {
+	padding-right: 0;
+}
+
+.nomers_text {
+	background-color: #4e0894;
+	border-radius: 50px;
+	padding: 114px 134px;
+	margin: auto;
+	margin-top: 0;
+	font-size: 26px;
+	color: #fff;
+	position: relative;
+	overflow: hidden;
+	transition: 0.5s;
+}
+
+.nomers_text:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100px;
+	background-color: rgb(255, 255, 255, 0.3);
+	transform: translateX(-9em) skewX(-45deg);
+}
+
+.nomers_block a:hover:before {
+	animation: moveLight 1s;
+}
+
+@keyframes moveLight {
+	from {
+		transform: translateX(-9em) skewX(-45deg);
+	}
+	to {
+		transform: translateX(20em) skewX(-45deg);
+	}
+}
+
+.nomers_text hr {
+	margin: 10px 0;
+	width: 100%;
+	height: 1px;
+	background-color: #fff;
+}
+
+.nomers_text span {
+	font-size: 24px;
+}
+
+@media (max-width: 1280px) {
+	.about_text_sec {
+		width: 350px;
+	}
+
+	.services_view {
+		justify-content: center;
+	}
+
+	.servicesss {
+		width: 180px;
+		padding: 0 20px;
+	}
+
+	.nomers_block img {
+		width: 350px;
+	}
+
+	.nomers_text {
+		padding: 100px 100px;
+		margin: 0 10px 40px;
+	}
+
+	.nomers_block {
+		justify-content: space-around;
+	}
+}
+
+@media (max-width: 1024px) {
+	.home_back {
+		width: 90%;
+	}
+
+	.booking_block {
+		padding: 35px 12px 0 12px;
+	}
+
+	input,
+	select {
+		width: 120px;
+	}
+
+	input[type='submit'] {
+		width: 150px;
+	}
+
+	.modal_content {
+		font-size: 28px;
+	}
+
+	#about {
+		background-size: 30%, 30%;
+		background-position: 1% 50%, 99% 50%;
+		height: 400px;
+	}
+
+	.about {
+		padding-top: 50px;
+	}
+
+	.about_text_main {
+		padding-bottom: 20px;
+	}
+
+	.about_text_sec {
+		padding-bottom: 40px;
+	}
+
+	.services_img img {
+		width: 70px;
+	}
+
+	.services_text {
+		font-size: 16px;
+	}
+
+	.nomers_block img {
+		width: 300px;
+	}
+
+	.nomers_text {
+		padding: 80px 80px;
+		margin: 0 10px 40px;
+	}
+}
+
+@media (max-width: 768px) {
+	#about {
+		background-size: 25%, 25%;
+		background-position: 1% 50%, 99% 50%;
+		height: 400px;
+	}
+
+	.home_back {
+		width: 95%;
+	}
+
+	.booking_block {
+		padding: 25px 12px 0 12px;
+	}
+
+	.booking_text {
+		font-size: 14px;
+	}
+
+	input,
+	select {
+		width: 90px;
+	}
+
+	input[type='submit'] {
+		width: 150px;
+	}
+
+	.about_button_more {
+		width: 767px;
+	}
+
+	.more_content {
+		width: 700px;
+	}
+
+	.modal_content {
+		font-size: 28px;
+	}
+
+	.servicesss {
+		width: 120px;
+		padding: 0 10px;
+	}
+
+	.nomers_block img {
+		width: 200px;
+	}
+
+	.nomers_text {
+		padding: 63px 30px;
+		margin: 0 10px 40px;
+		border-radius: 20px;
+	}
+
+	.nomers_text hr {
+		margin: 5px 0;
+		padding-bottom: 0;
+	}
+}
