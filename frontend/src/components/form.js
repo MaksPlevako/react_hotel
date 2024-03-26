@@ -8,7 +8,7 @@ export default function Form() {
 
 	const [data, setData] = useState([])
 	useEffect(() => {
-		fetch('http://localhost:8082/nomers')
+		fetch('http://localhost:8080/nomers')
 			.then(res => res.json())
 			.then(data => setData(data))
 			.catch(err => console.log(err))
@@ -30,7 +30,7 @@ export default function Form() {
 	const handleSubmit = event => {
 		event.preventDefault()
 		axios
-			.post('http://localhost:8082/hotel', values)
+			.post('http://localhost:8080/hotel', values)
 			.then(res => console.log('good', values))
 			.catch(err => console.log(err))
 		setActive(true)
@@ -133,8 +133,7 @@ export default function Form() {
 							</option>
 							{data.map((b, i) => (
 								<option key={i} value={b.id}>
-									{' '}
-									{b.nomers_name}{' '}
+									{b.nomers_name}
 								</option>
 							))}
 						</select>
@@ -147,7 +146,7 @@ export default function Form() {
 				</div>
 			</form>
 			<div
-				className={active ? 'modal active' : 'modal'}
+				className={active ? 'modal_thx active' : 'modal_thx'}
 				onClick={() => setActive(false)}
 			>
 				<div className='modal_content' onClick={e => e.stopPropagation()}>

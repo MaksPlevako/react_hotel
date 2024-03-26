@@ -14,7 +14,7 @@ const db = mysql.createConnection({
 })
 
 app.get('/nomers', (req, res) => {
-	const sql = 'SELECT `id`, `nomers_name` FROM `nomers`'
+	const sql = 'SELECT * FROM `nomers` ORDER BY `number of booked` ASC, `id` ASC'
 	db.query(sql, (err, data) => {
 		if (err) return res.json(err)
 		return res.json(data)
@@ -24,9 +24,6 @@ app.get('/nomers', (req, res) => {
 app.post('/hotel', (req, res) => {
 	const sql =
 		'INSERT INTO `clients`(`name`, `phone`, `arrival_date`, `departure_date`, `number_of_guests`, `nomer`) VALUES (?)'
-
-	const num =
-		'UPDATE `nomers` SET `number of booked` = `number of booked` + 1 WHERE `id`=(?)'
 
 	const values = [
 		req.body.name,
@@ -41,12 +38,21 @@ app.post('/hotel', (req, res) => {
 		if (err) return res.json(err)
 		return res.json(data)
 	})
-	db.query(num, [values[req.body.nomer]], (err, data) => {
+})
+
+app.post('/hotel', (req, res) => {
+	const num =
+		'UPDATE `nomers` SET `number of booked` = `number of booked` + 1 WHERE `id`=(?)'
+
+	const values = req.body.nomer
+	console.log(values)
+
+	db.query(num, values, (err, data) => {
 		if (err) return res.json(err)
 		return res.json(data)
 	})
 })
 
-app.listen(8082, () => {
+app.listen(8080, () => {
 	console.log('listening')
 })
