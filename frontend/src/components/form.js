@@ -31,7 +31,7 @@ export default function Form() {
 		event.preventDefault()
 		axios
 			.post('http://localhost:8080/hotel', values)
-			.then(res => console.log('good', values))
+			.then(res => console.log(values))
 			.catch(err => console.log(err))
 		setActive(true)
 	}
@@ -131,8 +131,8 @@ export default function Form() {
 							<option disabled defaultValue>
 								Виберіть номер
 							</option>
-							{data.map((b, i) => (
-								<option key={i} value={b.id}>
+							{data.map(b => (
+								<option key={b.id} value={b.id}>
 									{b.nomers_name}
 								</option>
 							))}
