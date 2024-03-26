@@ -2,13 +2,13 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-function Form() {
+export default function Form() {
 	const [name, setName] = React.useState('')
 	const [active, setActive] = React.useState(false)
 
 	const [data, setData] = useState([])
 	useEffect(() => {
-		fetch('http://localhost:8080/nomers')
+		fetch('http://localhost:8082/nomers')
 			.then(res => res.json())
 			.then(data => setData(data))
 			.catch(err => console.log(err))
@@ -30,7 +30,7 @@ function Form() {
 	const handleSubmit = event => {
 		event.preventDefault()
 		axios
-			.post('http://localhost:8080/hotel', values)
+			.post('http://localhost:8082/hotel', values)
 			.then(res => console.log('good', values))
 			.catch(err => console.log(err))
 		setActive(true)
@@ -159,5 +159,3 @@ function Form() {
 		</div>
 	)
 }
-
-export default Form

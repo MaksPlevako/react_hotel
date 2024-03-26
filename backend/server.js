@@ -24,6 +24,10 @@ app.get('/nomers', (req, res) => {
 app.post('/hotel', (req, res) => {
 	const sql =
 		'INSERT INTO `clients`(`name`, `phone`, `arrival_date`, `departure_date`, `number_of_guests`, `nomer`) VALUES (?)'
+
+	const num =
+		'UPDATE `nomers` SET `number of booked` = `number of booked` + 1 WHERE `id`=(?)'
+
 	const values = [
 		req.body.name,
 		req.body.phone,
@@ -37,8 +41,12 @@ app.post('/hotel', (req, res) => {
 		if (err) return res.json(err)
 		return res.json(data)
 	})
+	db.query(num, [values[req.body.nomer]], (err, data) => {
+		if (err) return res.json(err)
+		return res.json(data)
+	})
 })
 
-app.listen(8080, () => {
+app.listen(8082, () => {
 	console.log('listening')
 })
