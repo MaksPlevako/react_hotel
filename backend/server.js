@@ -36,20 +36,15 @@ app.post('/hotel', (req, res) => {
 
 	db.query(sql, [values], (err, data) => {
 		if (err) {
-			// Если произошла ошибка при добавлении клиента, вернуть ее
 			return res.json(err)
 		} else {
-			// Если клиент успешно добавлен, выполнить запрос на обновление количества забронированных номеров
 			const num =
 				'UPDATE `nomers` SET `number of booked` = `number of booked` + 1 WHERE `id`= ?'
 
-			// Выполнение запроса на обновление количества забронированных номеров
 			db.query(num, [req.body.nomer], (err, data) => {
 				if (err) {
-					// Если произошла ошибка при обновлении количества забронированных номеров, вернуть ее
 					return res.json(err)
 				} else {
-					// Если оба запроса выполнены успешно, вернуть данные
 					return res.json(data)
 				}
 			})
