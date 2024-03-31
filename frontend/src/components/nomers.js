@@ -3,7 +3,7 @@ import nomer1 from '../img/nomer_1.png'
 import nomer2 from '../img/nomer_2.png'
 import nomer3 from '../img/nomer_3.png'
 import nomer4 from '../img/nomer_4.png'
-import nomer5 from '../img/nomer_5.png'
+import nomer5 from '../img/nomer_6.png'
 
 function Nomers() {
 	return (

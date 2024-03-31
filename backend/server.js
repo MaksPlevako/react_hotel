@@ -14,7 +14,8 @@ const db = mysql.createConnection({
 })
 
 app.get('/nomers', (req, res) => {
-	const sql = 'SELECT * FROM `nomers` ORDER BY `number of booked` ASC, `id` ASC'
+	const sql =
+		'SELECT `id`, `nomers_name`, `file_photo` FROM `nomers` ORDER BY `number of booked` ASC, `id` ASC'
 	db.query(sql, (err, data) => {
 		if (err) return res.json(err)
 		return res.json(data)
@@ -42,11 +43,8 @@ app.post('/hotel', (req, res) => {
 				'UPDATE `nomers` SET `number of booked` = `number of booked` + 1 WHERE `id`= ?'
 
 			db.query(num, [req.body.nomer], (err, data) => {
-				if (err) {
-					return res.json(err)
-				} else {
-					return res.json(data)
-				}
+				if (err) return res.json(err)
+				return res.json(data)
 			})
 		}
 	})
