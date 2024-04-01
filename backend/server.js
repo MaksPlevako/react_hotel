@@ -24,11 +24,12 @@ app.get('/nomers', (req, res) => {
 
 app.post('/hotel', (req, res) => {
 	const sql =
-		'INSERT INTO `clients`(`name`, `phone`, `arrival_date`, `departure_date`, `number_of_guests`, `nomer`) VALUES (?)'
+		'INSERT INTO `clients`(`name`, `phone`, `email`, `arrival_date`, `departure_date`, `number_of_guests`, `nomer`) VALUES (?)'
 
 	const values = [
 		req.body.name,
 		req.body.phone,
+		req.body.email,
 		req.body.arrival_date,
 		req.body.departure_date,
 		req.body.number_of_guests,

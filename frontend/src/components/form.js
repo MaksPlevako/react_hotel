@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 export default function Form() {
-	const [name, setName] = React.useState('')
-	const [active, setActive] = React.useState(false)
+	const [name, setName] = useState('')
+	const [active, setActive] = useState(false)
+	const [activechange, setActivechange] = useState(false)
 	const [data, setData] = useState([])
 	const [img, setImg] = useState([])
 	const [currentNum, setCurrentNum] = useState(0)
 	const [loading, setLoading] = useState(true)
+	const [activeButton, setActiveButton] = useState(false)
 
 	useEffect(() => {
 		fetch('http://localhost:8080/nomers')
@@ -25,14 +27,32 @@ export default function Form() {
 	const [values, setValues] = useState({
 		name: '',
 		phone: '',
+		email: '',
 		arrival_date: '',
-		date_eviction: '',
+		departure_date: '',
 		number_of_guests: '',
-		nomer: '',
+		// nomer: '',
 	})
 
+	useEffect(() => {
+		const isButton = () => {
+			if (
+				values.name !== '' &&
+				values.phone !== '' &&
+				values.email !== '' &&
+				values.arrival_date !== '' &&
+				values.departure_date !== ''
+			) {
+				return true
+			} else {
+				return false
+			}
+		}
+		setActiveButton(isButton())
+	}, [values])
+
 	const handleChange = event => {
-		setValues({ ...values, [event.target.name]: [event.target.value] })
+		setValues({ ...values, [event.target.name]: event.target.value })
 		if (event.target.name === 'name') setName(event.target.value)
 	}
 
@@ -98,6 +118,21 @@ export default function Form() {
 							</div>
 						</div>
 						<div className='booking_block'>
+							<label className='booking_text'>Email</label>
+							<div className='booking_form'>
+								<input
+									type='email'
+									name='email'
+									id='email'
+									placeholder='maksplevako@gmail.com'
+									required
+									onChange={handleChange}
+								/>
+								<span className='validity'></span>
+							</div>
+						</div>
+						<br />
+						<div className='booking_block'>
 							<label className='booking_text'>Заїзд</label>
 							<div className='booking_form'>
 								<input
@@ -144,40 +179,39 @@ export default function Form() {
 								<span className='validity'></span>
 							</div>
 						</div>
-						<div className='booking_block'>
-							<label className='booking_text'>Номер</label>
-							<div className='booking_form'>
-								<select
-									name='nomer'
-									id='name_nomer'
-									required
-									onChange={handleChange}
-								>
-									<option disabled defaultValue>
-										Виберіть номер
-									</option>
-									{data.map(b => (
-										<option key={b.id} value={b.id}>
-											{b.nomers_name}
-										</option>
-									))}
-								</select>
-								<span className='validity'></span>
-							</div>
-						</div>
-						<div className='change_nomer'>
+						<br />
+						<button
+							className='change_button'
+							onClick={() => setActivechange(true)}
+							disabled={!activeButton}
+							type='button'
+						>
+							Обрати номер
+						</button>
+						<div
+							className={activechange ? 'change_nomer active' : 'change_nomer'}
+						>
 							<div className='change_nomer_modal'>
+								<button
+									className='close_change_nomer'
+									onClick={() => setActivechange(false)}
+								>
+									X
+								</button>
 								<div className='nomer_name'>{data[currentNum].nomers_name}</div>
 								<div className='nomer_photo'>
-									<button onClick={prevNomer}>Попередній номер</button>
+									<button onClick={() => prevNomer()} type='button'>
+										Попередній номер
+									</button>
 									<img src={'/img/' + img[currentNum]} alt='' />
-									<button onClick={nextNomer}>Наступний номер</button>
+									<button onClick={() => nextNomer()} type='button'>
+										Наступний номер
+									</button>
+								</div>
+								<div className='booking_button'>
+									<input type='submit' value='Забронювати' />
 								</div>
 							</div>
-						</div>
-						<div className='line'></div>
-						<div className='booking_button'>
-							<input type='submit' value='Забронювати' />
 						</div>
 					</form>
 					<div
