@@ -1,13 +1,13 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import Price from './price'
 
 export default function Form() {
 	const [name, setName] = useState('')
 	const [active, setActive] = useState(false)
 	const [activechange, setActivechange] = useState(false)
 	const [data, setData] = useState([])
-	const [img, setImg] = useState([])
 	const [currentNum, setCurrentNum] = useState(0)
 	const [loading, setLoading] = useState(true)
 	const [activeButton, setActiveButton] = useState(false)
@@ -17,8 +17,6 @@ export default function Form() {
 			.then(res => res.json())
 			.then(data => {
 				setData(data)
-				const photo_arr = data.map(m => m.file_photo)
-				setImg(photo_arr)
 				setLoading(false)
 			})
 			.catch(err => console.log(err))
@@ -31,7 +29,7 @@ export default function Form() {
 		arrival_date: '',
 		departure_date: '',
 		number_of_guests: '',
-		// nomer: '',
+		nomer: '',
 	})
 
 	useEffect(() => {
@@ -74,6 +72,7 @@ export default function Form() {
 			.post('http://localhost:8080/hotel', values)
 			.then(res => console.log(values))
 			.catch(err => console.log(err))
+		setActivechange(false)
 		setActive(true)
 	}
 
@@ -167,10 +166,10 @@ export default function Form() {
 									required
 									onChange={handleChange}
 								>
-									<option disabled defaultValue>
-										Виберіть кількість гостей
+									<option disabled>Виберіть кількість гостей</option>
+									<option defaultValue value='1'>
+										1
 									</option>
-									<option value='1'>1</option>
 									<option value='2'>2</option>
 									<option value='3'>3</option>
 									<option value='4'>4</option>
@@ -195,6 +194,7 @@ export default function Form() {
 								<button
 									className='close_change_nomer'
 									onClick={() => setActivechange(false)}
+									type='button'
 								>
 									X
 								</button>
@@ -203,13 +203,31 @@ export default function Form() {
 									<button onClick={() => prevNomer()} type='button'>
 										Попередній номер
 									</button>
-									<img src={'/img/' + img[currentNum]} alt='' />
+									<img
+										src={'/img/' + data[currentNum].file_photo}
+										alt={currentNum}
+									/>
 									<button onClick={() => nextNomer()} type='button'>
 										Наступний номер
 									</button>
 								</div>
+								<Price
+									departureDate={values.departure_date}
+									arrivalDate={values.arrival_date}
+									guest={values.number_of_guests}
+									nomer={data[currentNum].id}
+								/>
 								<div className='booking_button'>
-									<input type='submit' value='Забронювати' />
+									<input
+										onClick={() =>
+											setValues({
+												...values,
+												nomer: data[currentNum].id,
+											})
+										}
+										type='submit'
+										value='Забронювати'
+									/>
 								</div>
 							</div>
 						</div>

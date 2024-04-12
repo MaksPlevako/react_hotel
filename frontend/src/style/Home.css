@@ -79,7 +79,8 @@ input:valid + span::after {
 	height: 100%;
 	border-radius: 50px;
 	position: fixed;
-	display: none;
+	transform: scale(0);
+	transition: ease-out 1s;
 }
 
 .close_change_nomer {
@@ -107,7 +108,7 @@ input:valid + span::after {
 }
 
 .nomer_name {
-	padding-top: 20px;
+	padding-top: 10px;
 	padding-bottom: 15px;
 	font-size: 32px;
 }
@@ -134,8 +135,13 @@ input:valid + span::after {
 	transition: ease-in-out 1s;
 }
 
+.price_text {
+	font-size: 24px;
+	padding-top: 5px;
+}
+
 .booking_button {
-	padding-top: 20px;
+	padding-top: 5px;
 }
 
 .booking_button input {
@@ -168,11 +174,13 @@ input:valid + span::after {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	display: none;
+	transform: scale(0);
+	transition: ease-out 1s;
 }
 
 .active {
-	display: block;
+	transform: scale(1);
+	transition: ease 1s;
 }
 
 .modal_content {
