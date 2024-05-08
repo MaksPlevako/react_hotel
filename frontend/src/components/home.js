@@ -8,7 +8,7 @@ function Home() {
 				<div className='home'>
 					<div className='home_back'>
 						<div className='home_text'>
-							Ласкаво просимо в <br /> "название"
+							Ласкаво просимо в <br /> "Amethyst"
 						</div>
 						<div className='booking'>
 							<Form />
