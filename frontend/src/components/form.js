@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import Price from './price'
+import HotelRoomPicker from './alg'
 
 export default function Form() {
 	const [name, setName] = useState('')
@@ -52,18 +52,6 @@ export default function Form() {
 	const handleChange = event => {
 		setValues({ ...values, [event.target.name]: event.target.value })
 		if (event.target.name === 'name') setName(event.target.value)
-	}
-
-	const prevNomer = () => {
-		setCurrentNum(prevIndex =>
-			prevIndex === 0 ? data.length - 1 : prevIndex - 1
-		)
-	}
-
-	const nextNomer = () => {
-		setCurrentNum(prevIndex =>
-			prevIndex === data.length - 1 ? 0 : prevIndex + 1
-		)
 	}
 
 	const handleSubmit = event => {
@@ -173,7 +161,6 @@ export default function Form() {
 									<option value='2'>2</option>
 									<option value='3'>3</option>
 									<option value='4'>4</option>
-									<option value='5'>5</option>
 								</select>
 								<span className='validity'></span>
 							</div>
@@ -200,23 +187,12 @@ export default function Form() {
 								</button>
 								<div className='nomer_name'>{data[currentNum].nomers_name}</div>
 								<div className='nomer_photo'>
-									<button onClick={() => prevNomer()} type='button'>
-										Попередній номер
-									</button>
-									<img
-										src={'/img/' + data[currentNum].file_photo}
-										alt={currentNum}
+									<HotelRoomPicker
+										departureDate={values.departure_date}
+										arrivalDate={values.arrival_date}
+										guest={values.number_of_guests}
 									/>
-									<button onClick={() => nextNomer()} type='button'>
-										Наступний номер
-									</button>
 								</div>
-								<Price
-									departureDate={values.departure_date}
-									arrivalDate={values.arrival_date}
-									guest={values.number_of_guests}
-									nomer={data[currentNum].id}
-								/>
 								<div className='booking_button'>
 									<input
 										onClick={() =>

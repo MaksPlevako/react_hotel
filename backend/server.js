@@ -15,7 +15,7 @@ const db = mysql.createConnection({
 
 app.get('/nomers', (req, res) => {
 	const sql =
-		'SELECT `id`, `nomers_name`, `file_photo` FROM `nomers` ORDER BY `number of booked` ASC, `id` ASC'
+		'SELECT `id`, `nomers name`, `file photo`, `number of seats`, `price` FROM `nomers` WHERE `booked`=0'
 	db.query(sql, (err, data) => {
 		if (err) return res.json(err)
 		return res.json(data)
