@@ -21,6 +21,9 @@ export default function HotelRoomPicker(props) {
 			const currentGuest = props.guest === 0 ? 1 : props.guest
 			const bestRoom = geneticAlgorithm(roomData, 50, 50, currentGuest)
 			setBestRoom(bestRoom)
+			if (props.onRoomSelect) {
+				props.onRoomSelect(bestRoom.id) // Передайте ID обраного номера через onRoomSelect
+			}
 		}
 	}, [roomData, props.guest])
 
@@ -32,7 +35,7 @@ export default function HotelRoomPicker(props) {
 	// Генетичний алгоритм для пошуку найкращого номера
 	const geneticAlgorithm = (roomData, populationSize, generations, guest) => {
 		let bestRoom = null
-		let bestFitness = guest
+		const bestFitness = guest === 3 ? guest : 4
 		// Повторення для кожного покоління
 		for (let gen = 0; gen < generations; gen++) {
 			// Випадково обираємо номери з поточної популяції та обчислюємо їх придатність
@@ -40,7 +43,6 @@ export default function HotelRoomPicker(props) {
 				const randomRoom = roomData[Math.floor(Math.random() * roomData.length)]
 				const fitness = calculateFitness(randomRoom)
 				if (bestFitness == fitness) {
-					console.log(randomRoom)
 					bestRoom = randomRoom
 				}
 			}
@@ -53,6 +55,9 @@ export default function HotelRoomPicker(props) {
 		const currentGuest = props.guest === 0 ? 1 : props.guest
 		const newRoom = geneticAlgorithm(roomData, 50, 50, currentGuest)
 		setBestRoom(newRoom)
+		if (props.onRoomSelect) {
+			props.onRoomSelect(newRoom.id) // Передайте ID обраного номера через onRoomSelect
+		}
 	}
 
 	return (
