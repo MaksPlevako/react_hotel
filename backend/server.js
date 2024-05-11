@@ -41,7 +41,7 @@ app.post('/hotel', (req, res) => {
 			return res.json(err)
 		} else {
 			const num =
-				'UPDATE `nomers` SET `number of booked` = `number of booked` + 1 WHERE `id`= ?'
+				'UPDATE `nomers` SET `number of booked` = `number of booked` + 1, `booked` = 1 WHERE `id`= ?'
 
 			db.query(num, [req.body.nomer], (err, data) => {
 				if (err) return res.json(err)

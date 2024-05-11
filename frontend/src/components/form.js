@@ -42,7 +42,6 @@ export default function Form() {
 	}
 
 	const changeId = roomId => {
-		console.log(roomId)
 		setValues({
 			...values,
 			nomer: roomId,
