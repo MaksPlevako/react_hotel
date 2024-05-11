@@ -72,14 +72,14 @@ export default function HotelRoomPicker(props) {
 						Назва: {bestRoom['nomers name']} Номер кімнати: {bestRoom.id}
 					</p>
 					<img src={'/img/' + bestRoom['file photo']} alt='' />
-					<p>
+					<div>
 						<Price
 							departureDate={props.departureDate}
 							arrivalDate={props.arrivalDate}
 							guest={props.guest}
 							price={bestRoom.price}
 						/>
-					</p>
+					</div>
 					<p>Кількість місць: {bestRoom['number of seats']}</p>
 				</div>
 			)}
