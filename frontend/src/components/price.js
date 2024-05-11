@@ -12,8 +12,8 @@ export default function Price(props) {
 	const cost = day * 5000 + guest * 1500 + price
 
 	return (
-		<>
+		<div>
 			<p className='price_text'>Оціночна вартіть: {cost}₴</p>
-		</>
+		</div>
 	)
 }

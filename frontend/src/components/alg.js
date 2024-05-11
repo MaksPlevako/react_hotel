@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react'
 import Price from './price'
 
 export default function HotelRoomPicker(props) {
-	const [bestRoom, setBestRoom] = useState(null)
+	const [bestRoom, setBestRoom] = useState()
 	const [roomData, setRoomData] = useState([])
 
 	useEffect(() => {
-		// Отримання даних про номери готелю
 		fetch('http://localhost:8080/nomers')
 			.then(res => res.json())
 			.then(data => {
@@ -19,30 +18,29 @@ export default function HotelRoomPicker(props) {
 		// Перевірка, чи дані про номери готелю завантажені
 		if (roomData.length > 0) {
 			// Запуск генетичного алгоритму
-			const bestRoom = geneticAlgorithm(roomData, 50, 5)
+			const currentGuest = props.guest === 0 ? 1 : props.guest
+			const bestRoom = geneticAlgorithm(roomData, 50, 50, currentGuest)
 			setBestRoom(bestRoom)
 		}
-	}, [roomData])
+	}, [roomData, props.guest])
 
 	// Функція придатності (fitness function)
 	const calculateFitness = room => {
-		const guest = props.guest
-		console.log(guest)
-		return (room['number of seats'] * room.price) / guest
+		return room['number of seats']
 	}
 
 	// Генетичний алгоритм для пошуку найкращого номера
-	const geneticAlgorithm = (roomData, populationSize, generations) => {
+	const geneticAlgorithm = (roomData, populationSize, generations, guest) => {
 		let bestRoom = null
-		let bestFitness = null
+		let bestFitness = guest
 		// Повторення для кожного покоління
 		for (let gen = 0; gen < generations; gen++) {
 			// Випадково обираємо номери з поточної популяції та обчислюємо їх придатність
 			for (let i = 0; i < populationSize; i++) {
 				const randomRoom = roomData[Math.floor(Math.random() * roomData.length)]
 				const fitness = calculateFitness(randomRoom)
-				if (fitness > bestFitness) {
-					bestFitness = fitness
+				if (bestFitness == fitness) {
+					console.log(randomRoom)
 					bestRoom = randomRoom
 				}
 			}
@@ -52,7 +50,8 @@ export default function HotelRoomPicker(props) {
 
 	// Функція для зміни номера по натисканню кнопки
 	const changeRoom = () => {
-		const newRoom = geneticAlgorithm(roomData, 50, 5)
+		const currentGuest = props.guest === 0 ? 1 : props.guest
+		const newRoom = geneticAlgorithm(roomData, 50, 50, currentGuest)
 		setBestRoom(newRoom)
 	}
 
@@ -76,7 +75,6 @@ export default function HotelRoomPicker(props) {
 						/>
 					</p>
 					<p>Кількість місць: {bestRoom['number of seats']}</p>
-					{/* Додайте інші дані про номер, які вам потрібні */}
 				</div>
 			)}
 		</div>
