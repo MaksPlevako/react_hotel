@@ -17,7 +17,7 @@ export default function HotelRoomPicker(props) {
 	useEffect(() => {
 		if (roomData.length > 0) {
 			const currentGuest = props.guest === 0 ? 1 : props.guest
-			const bestRoom = geneticAlgorithm(roomData, 50, 50, currentGuest)
+			const bestRoom = geneticAlgorithm(roomData, 50, 5, currentGuest)
 			setBestRoom(bestRoom)
 		}
 	}, [roomData, props.guest])
@@ -29,7 +29,6 @@ export default function HotelRoomPicker(props) {
 	const geneticAlgorithm = (roomData, populationSize, generations, guest) => {
 		let bestRoom = null
 		const bestFitness = guest == 3 ? 4 : guest
-		console.log(bestFitness)
 		for (let gen = 0; gen < generations; gen++) {
 			for (let i = 0; i < populationSize; i++) {
 				const randomRoom = roomData[Math.floor(Math.random() * roomData.length)]
@@ -47,7 +46,7 @@ export default function HotelRoomPicker(props) {
 
 	const changeRoom = () => {
 		const currentGuest = props.guest === 0 ? 1 : props.guest
-		const newRoom = geneticAlgorithm(roomData, 50, 50, currentGuest)
+		const newRoom = geneticAlgorithm(roomData, 50, 5, currentGuest)
 		setBestRoom(newRoom)
 		if (props.onRoomSelect) {
 			props.onRoomSelect(newRoom.id)

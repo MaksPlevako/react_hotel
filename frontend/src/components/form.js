@@ -20,13 +20,17 @@ export default function Form() {
 	})
 
 	useEffect(() => {
+		const departureDate = new Date(values.departure_date)
+		const arrivalDate = new Date(values.arrival_date)
+		const time = departureDate.getTime() - arrivalDate.getTime()
 		const isButton = () => {
 			if (
 				values.name !== '' &&
 				values.phone !== '' &&
 				values.email !== '' &&
 				values.arrival_date !== '' &&
-				values.departure_date !== ''
+				values.departure_date !== '' &&
+				time > 0
 			) {
 				return true
 			} else {
