@@ -63,24 +63,31 @@ export default function HotelRoomPicker(props) {
 
 	return (
 		<div>
-			<button type='button' onClick={changeRoom}>
-				Змінити номер
-			</button>
 			{bestRoom && (
-				<div>
-					<p>
-						Назва: {bestRoom['nomers name']} Номер кімнати: {bestRoom.id}
-					</p>
-					<img src={'/img/' + bestRoom['file photo']} alt='' />
-					<div>
-						<Price
-							departureDate={props.departureDate}
-							arrivalDate={props.arrivalDate}
-							guest={props.guest}
-							price={bestRoom.price}
-						/>
+				<div className='nomers_change_nomer'>
+					<div className='change_nomers'>
+						<p>{bestRoom['nomers name']}</p>
+						<img src={'/img/' + bestRoom['file photo']} alt='' />
+						<div>
+							<Price
+								departureDate={props.departureDate}
+								arrivalDate={props.arrivalDate}
+								guest={props.guest}
+								price={bestRoom.price}
+							/>
+						</div>
+						<p>
+							Кількість місць: {bestRoom['number of seats']} Номер кімнати:{' '}
+							{bestRoom.id}
+						</p>
 					</div>
-					<p>Кількість місць: {bestRoom['number of seats']}</p>
+					<button
+						type='button'
+						className='change_nomer_button'
+						onClick={changeRoom}
+					>
+						Змінити номер
+					</button>
 				</div>
 			)}
 		</div>

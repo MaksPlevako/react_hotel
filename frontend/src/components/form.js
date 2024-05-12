@@ -173,7 +173,7 @@ export default function Form() {
 						>
 							X
 						</button>
-						<div className='nomer_photo'>
+						<div className='nomer_change'>
 							<HotelRoomPicker
 								departureDate={values.departure_date}
 								arrivalDate={values.arrival_date}
