@@ -9,27 +9,29 @@ export default function Form() {
 	const [activechange, setActivechange] = useState(false)
 	const [activeButton, setActiveButton] = useState(false)
 
-	const [values, setValues] = useState({
+	const [bookings, setBookings] = useState({
 		name: '',
 		phone: '',
-		email: '',
-		arrival_date: '',
-		departure_date: '',
 		number_of_guests: '',
-		nomer: '',
+		room: '',
+		room_number: '',
+		check_in_date: '',
+		check_out_date: '',
+		total_price: '',
+		email: '',
 	})
 
 	useEffect(() => {
-		const departureDate = new Date(values.departure_date)
-		const arrivalDate = new Date(values.arrival_date)
-		const time = departureDate.getTime() - arrivalDate.getTime()
+		const check_in_date = new Date(bookings.check_in_date)
+		const check_out_date = new Date(bookings.check_out_date)
+		const time = check_out_date.getTime() - check_in_date.getTime()
 		const isButton = () => {
 			if (
-				values.name !== '' &&
-				values.phone !== '' &&
-				values.email !== '' &&
-				values.arrival_date !== '' &&
-				values.departure_date !== '' &&
+				bookings.name !== '' &&
+				bookings.phone !== '' &&
+				bookings.email !== '' &&
+				bookings.check_in_date !== '' &&
+				bookings.check_out_date !== '' &&
 				time > 0
 			) {
 				return true
@@ -38,25 +40,27 @@ export default function Form() {
 			}
 		}
 		setActiveButton(isButton())
-	}, [values])
+	}, [bookings])
 
 	const handleChange = event => {
-		setValues({ ...values, [event.target.name]: event.target.value })
+		setBookings({ ...bookings, [event.target.name]: event.target.value })
 		if (event.target.name === 'name') setName(event.target.value)
 	}
 
-	const changeId = roomId => {
-		setValues({
-			...values,
-			nomer: roomId,
+	const changeRoom = (room, roomId, price) => {
+		setBookings({
+			...bookings,
+			room: room,
+			room_number: roomId,
+			total_price: price,
 		})
 	}
 
 	const handleSubmit = event => {
 		event.preventDefault()
 		axios
-			.post('http://localhost:8080/hotel', values)
-			.then(res => console.log(values))
+			.post('http://localhost:8080/Amethyst', bookings)
+			.then(res => console.log(bookings))
 			.catch(err => console.log(err))
 		setActivechange(false)
 		setActive(true)
@@ -118,7 +122,7 @@ export default function Form() {
 					<div className='booking_form'>
 						<input
 							type='date'
-							name='arrival_date'
+							name='check_in_date'
 							id='arrival'
 							required
 							onChange={handleChange}
@@ -131,7 +135,7 @@ export default function Form() {
 					<div className='booking_form'>
 						<input
 							type='date'
-							name='departure_date'
+							name='check_out_date'
 							id='departure'
 							required
 							onChange={handleChange}
@@ -179,15 +183,15 @@ export default function Form() {
 						</button>
 						<div className='nomer_change'>
 							<HotelRoomPicker
-								departureDate={values.departure_date}
-								arrivalDate={values.arrival_date}
-								guest={values.number_of_guests}
-								onRoomSelect={changeId}
+								departureDate={bookings.check_out_date}
+								arrivalDate={bookings.check_in_date}
+								guest={bookings.number_of_guests}
+								onRoomSelect={changeRoom}
 							/>
 						</div>
 						<div className='booking_button'>
 							<input
-								onClick={() => changeId}
+								onClick={() => changeRoom}
 								type='submit'
 								value='Забронювати'
 							/>

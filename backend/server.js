@@ -10,45 +10,65 @@ const db = mysql.createConnection({
 	host: 'localhost',
 	user: 'root',
 	password: '',
-	database: 'hotel',
+	database: 'amethyst',
 })
 
-app.get('/nomers', (req, res) => {
+app.get('/rooms', (req, res) => {
 	const sql =
-		'SELECT `id`, `nomers name`, `file photo`, `number of seats`, `price` FROM `nomers` WHERE `booked`=0'
+		'SELECT `id`, `room`, `number_of_seats`, `file_photo` FROM `rooms` WHERE `booked`=0'
 	db.query(sql, (err, data) => {
 		if (err) return res.json(err)
 		return res.json(data)
 	})
 })
 
-app.post('/hotel', (req, res) => {
+app.post('/amethyst', (req, res) => {
 	const sql =
-		'INSERT INTO `clients`(`name`, `phone`, `email`, `arrival_date`, `departure_date`, `number_of_guests`, `nomer`) VALUES (?)'
+		'INSERT INTO `bookings`(`name`, `phone`, `number_of_guest`, `room`, `room_number`, `check_in_date`, `check_out_date`, `total_price`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
 
-	const values = [
-		req.body.name,
-		req.body.phone,
-		req.body.email,
-		req.body.arrival_date,
-		req.body.departure_date,
-		req.body.number_of_guests,
-		req.body.nomer,
-	]
+	const {
+		name,
+		phone,
+		number_of_guests,
+		room,
+		room_number,
+		check_in_date,
+		check_out_date,
+		total_price,
+		email,
+	} = req.body
 
-	db.query(sql, [values], (err, data) => {
-		if (err) {
-			return res.json(err)
-		} else {
-			const num =
-				'UPDATE `nomers` SET `number of booked` = `number of booked` + 1, `booked` = 1 WHERE `id`= ?'
+	db.query(
+		sql,
+		[
+			name,
+			phone,
+			number_of_guests,
+			room,
+			room_number,
+			check_in_date,
+			check_out_date,
+			total_price,
+		],
+		(err, data) => {
+			if (!err) {
+				const client =
+					'INSERT INTO `clients`(`name`, `phone`, `email`) VALUES (?, ?, ?)'
 
-			db.query(num, [req.body.nomer], (err, data) => {
-				if (err) return res.json(err)
-				return res.json(data)
-			})
+				db.query(client, [name, phone, email], (err, data) => {
+					if (!err) {
+						const num =
+							'UPDATE `rooms` SET `number_of_booked` = `number_of_booked` + 1, `booked` = 1 WHERE `id`= ?'
+
+						db.query(num, [room_number], (err, data) => {
+							if (err) return res.json(err)
+							return res.json(data)
+						})
+					} else return res.json(err)
+				})
+			} else return res.json(err)
 		}
-	})
+	)
 })
 
 app.listen(8080, () => {

@@ -4,9 +4,10 @@ import Price from './price'
 export default function HotelRoomPicker(props) {
 	const [bestRoom, setBestRoom] = useState()
 	const [roomData, setRoomData] = useState([])
+	const [price, setPrice] = useState()
 
 	useEffect(() => {
-		fetch('http://localhost:8080/nomers')
+		fetch('http://localhost:8080/rooms')
 			.then(res => res.json())
 			.then(data => {
 				setRoomData(data)
@@ -22,8 +23,12 @@ export default function HotelRoomPicker(props) {
 		}
 	}, [roomData, props.guest])
 
+	const handlePriceChange = cost => {
+		setPrice(cost)
+	}
+
 	const calculateFitness = room => {
-		return room['number of seats']
+		return room.number_of_seats
 	}
 
 	const geneticAlgorithm = (roomData, populationSize, generations, guest) => {
@@ -36,7 +41,7 @@ export default function HotelRoomPicker(props) {
 				if (bestFitness <= fitness) {
 					bestRoom = randomRoom
 					if (props.onRoomSelect) {
-						props.onRoomSelect(bestRoom.id)
+						props.onRoomSelect(bestRoom.room, bestRoom.id, price)
 					}
 				}
 			}
@@ -48,9 +53,6 @@ export default function HotelRoomPicker(props) {
 		const currentGuest = props.guest === 0 ? 1 : props.guest
 		const newRoom = geneticAlgorithm(roomData, 50, 5, currentGuest)
 		setBestRoom(newRoom)
-		if (props.onRoomSelect) {
-			props.onRoomSelect(newRoom.id)
-		}
 	}
 
 	return (
@@ -58,18 +60,19 @@ export default function HotelRoomPicker(props) {
 			{bestRoom && (
 				<div className='nomers_change_nomer'>
 					<div className='change_nomers'>
-						<p>{bestRoom['nomers name']}</p>
-						<img src={'/img/' + bestRoom['file photo']} alt='' />
+						<p>{bestRoom.room}</p>
+						<img src={'/img/' + bestRoom.file_photo} alt='' />
 						<div>
 							<Price
 								departureDate={props.departureDate}
 								arrivalDate={props.arrivalDate}
 								guest={props.guest}
-								price={bestRoom.price}
+								room={bestRoom.id}
+								onChangePrice={handlePriceChange}
 							/>
 						</div>
 						<p>
-							Кількість місць: {bestRoom['number of seats']} Номер кімнати:{' '}
+							Кількість місць: {bestRoom.number_of_seats} Номер кімнати:{' '}
 							{bestRoom.id}
 						</p>
 					</div>
